@@ -78,6 +78,8 @@
     <Content Include="bin\coretools\AntiXSSLibrary.dll" />
     <Content Include="bin\coretools\CrmSvcUtil.exe" />
     <Content Include="bin\coretools\CrmSvcUtil.xml" />
+    <Content Include="bin\coretools\CrmSvcUtilExtensions.Config.dll" />
+    <Content Include="bin\coretools\CrmSvcUtilExtensions.Config.pdb" />
     <Content Include="bin\coretools\Microsoft.Crm.Sdk.Proxy.dll" />
     <Content Include="bin\coretools\Microsoft.IdentityModel.dll" />
     <Content Include="bin\coretools\Microsoft.Xrm.Client.CodeGeneration.dll" />
@@ -104,7 +106,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y "$(TargetDir)$(ProjectName).???" "$(ProjectDir)bin\coretools\$(ProjectName).???"
-</PostBuildEvent>
+xcopy /Y "$(TargetDir)CrmSvcUtilExtensions.Config.???" "$(ProjectDir)bin\coretools\CrmSvcUtilExtensions.Config.???"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
