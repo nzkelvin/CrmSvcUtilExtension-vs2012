@@ -21,9 +21,11 @@
 #define SKIP_STATE_OPTIONSETS
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Crm.Services.Utility;
 using Microsoft.Xrm.Sdk.Metadata;
+using CrmSvcUtilExtensions.Config;
 
 namespace CrmSvcUtilExtensions
 {
@@ -33,6 +35,8 @@ namespace CrmSvcUtilExtensions
     /// </summary>
     public sealed class OptionSetsFilteringService : ICodeWriterFilterService
     {
+        CrmSvcUtilFiltersConfig _filterConfig;
+
         private Dictionary<String, bool> GeneratedOptionSets { get; set; }
 
         private ICodeWriterFilterService DefaultService { get; set; }
@@ -41,6 +45,14 @@ namespace CrmSvcUtilExtensions
         {
             DefaultService = defaultService;
             GeneratedOptionSets = new Dictionary<String, bool>();
+            LoadFilterData();
+        }
+
+        // todo: move to a helper class
+        private void LoadFilterData()
+        {
+            IConfigurationHelper configHelper = new ConfigurationHelper();
+            _filterConfig = configHelper.GetSection<CrmSvcUtilFiltersConfig>("crmsvcutilfilters");
         }
 
         /// <summary>
@@ -96,7 +108,10 @@ namespace CrmSvcUtilExtensions
         public bool GenerateEntity(
             EntityMetadata entityMetadata, IServiceProvider services)
         {
-            return DefaultService.GenerateEntity(entityMetadata, services);
+            if (!_filterConfig.Entities.Entity.Any(entity => string.Equals(entity, entityMetadata.LogicalName, StringComparison.InvariantCultureIgnoreCase)))
+                return false;
+
+            return this.DefaultService.GenerateEntity(entityMetadata, services);
         }
 
         /// <summary>

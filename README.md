@@ -2,4 +2,4 @@
 Filters for early bound crm classes generation
 
 Todo:
-* Only generate global optionsets and optionsets for filtered entites.
+* Refactor - move some code to helper classes and separated project.
