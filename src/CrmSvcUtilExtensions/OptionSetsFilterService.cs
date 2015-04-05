@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using Microsoft.Crm.Services.Utility;
 using Microsoft.Xrm.Sdk.Metadata;
 using CrmSvcUtilExtensions.Config;
+using CrmSvcUtilExtensions.Helpers;
 
 namespace CrmSvcUtilExtensions
 {
@@ -33,7 +34,7 @@ namespace CrmSvcUtilExtensions
     /// Create an implementation of ICodeWriterFilterService if you want to provide your own
     /// logic for whether or not a given item will have code generated for it.
     /// </summary>
-    public sealed class OptionSetsFilteringService : ICodeWriterFilterService
+    public sealed class OptionSetsFilterService : ICodeWriterFilterService
     {
         CrmSvcUtilFiltersConfig _filterConfig;
 
@@ -41,18 +42,11 @@ namespace CrmSvcUtilExtensions
 
         private ICodeWriterFilterService DefaultService { get; set; }
 
-        public OptionSetsFilteringService(ICodeWriterFilterService defaultService)
+        public OptionSetsFilterService(ICodeWriterFilterService defaultService)
         {
             DefaultService = defaultService;
             GeneratedOptionSets = new Dictionary<String, bool>();
-            LoadFilterData();
-        }
-
-        // todo: move to a helper class
-        private void LoadFilterData()
-        {
-            IConfigurationHelper configHelper = new ConfigurationHelper();
-            _filterConfig = configHelper.GetSection<CrmSvcUtilFiltersConfig>("crmsvcutilfilters");
+            _filterConfig = (new FilterDataHelper()).LoadFilterData();
         }
 
         /// <summary>

@@ -5,9 +5,9 @@ CrmSvcUtil.exe ^
 /o:Entities.cs
 
 CrmSvcUtil.exe ^
-/codewriterfilter:"CrmSvcUtilExtensions.OptionSetsFilteringService, CrmSvcUtilExtensions" ^
-/codecustomization:"CrmSvcUtilExtensions.CodeCustomizationService, CrmSvcUtilExtensions" ^
-/namingservice:"CrmSvcUtilExtensions.NamingService, CrmSvcUtilExtensions" ^
+/codewriterfilter:"CrmSvcUtilExtensions.OptionSetsFilterService, CrmSvcUtilExtensions" ^
+/codecustomization:"CrmSvcUtilExtensions.OptionSetsCodeCustomizationService, CrmSvcUtilExtensions" ^
+/namingservice:"CrmSvcUtilExtensions.OptionSetsNamingService, CrmSvcUtilExtensions" ^
 /url:http://vagrant-2012-r2:5555/KelvinDemo/XRMServices/2011/Organization.svc ^
 /namespace:CrmSvcUtilExtensions.Crm.OptionSets ^
 /out:OptionSets.cs

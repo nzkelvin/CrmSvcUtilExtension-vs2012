@@ -30,7 +30,7 @@ namespace CrmSvcUtilExtensions
     /// Implement this class if you want to provide your own logic for building names that
     /// will appear in the generated code.
     /// </summary>
-    public sealed class NamingService : INamingService
+    public sealed class OptionSetsNamingService : INamingService
     {
         private INamingService DefaultNamingService { get; set; }
 
@@ -40,7 +40,7 @@ namespace CrmSvcUtilExtensions
         /// </summary>
         private Dictionary<OptionSetMetadataBase, Dictionary<String, int>> OptionNames;
 
-        public NamingService(INamingService namingService)
+        public OptionSetsNamingService(INamingService namingService)
         {
             DefaultNamingService = namingService;
             OptionNames = new Dictionary<OptionSetMetadataBase,

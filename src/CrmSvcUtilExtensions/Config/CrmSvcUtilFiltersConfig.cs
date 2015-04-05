@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using CrmSvcUtilExtensions.Helpers;
 
 namespace CrmSvcUtilExtensions.Config
 {
-    [XmlRoot("crmsvcutilfilters")]
+    [XmlRoot(Constants.CONFIG_SECTION_NAME_CRMSVCUTILFILTERS)]
     public class CrmSvcUtilFiltersConfig
     {
         [XmlElement("entities")]

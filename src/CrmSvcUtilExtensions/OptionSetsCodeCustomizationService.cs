@@ -32,7 +32,7 @@ namespace CrmSvcUtilExtensions
     /// Create an implementation of ICustomizeCodeDomService if you want to manipulate the
     /// code dom after ICodeGenerationService has run.
     /// </summary>
-    public sealed class CodeCustomizationService : ICustomizeCodeDomService
+    public sealed class OptionSetsCodeCustomizationService : ICustomizeCodeDomService
     {
         /// <summary>
         /// Remove the unnecessary classes that we generated for entities. 

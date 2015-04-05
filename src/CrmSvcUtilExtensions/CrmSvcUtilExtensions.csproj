@@ -64,15 +64,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicFilteringService.cs" />
-    <Compile Include="CodeCustomizationService.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\FilterDataHelper.cs" />
+    <Compile Include="OptionSetsCodeCustomizationService.cs" />
     <Compile Include="Config\ConfigurationHelper.cs" />
     <Compile Include="Config\CrmSvcUtilFiltersConfig.cs" />
     <Compile Include="Config\CustomSectionHandler.cs" />
     <Compile Include="Config\EntitiesFilter.cs" />
     <Compile Include="Config\IConfigurationHelper.cs" />
     <Compile Include="Config\OptionSetsFilter.cs" />
-    <Compile Include="NamingService.cs" />
-    <Compile Include="OptionSetsFilteringService.cs" />
+    <Compile Include="OptionSetsNamingService.cs" />
+    <Compile Include="OptionSetsFilterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

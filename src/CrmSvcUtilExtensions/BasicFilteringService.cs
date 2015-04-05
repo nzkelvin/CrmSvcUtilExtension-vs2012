@@ -5,6 +5,7 @@ using Microsoft.Xrm.Sdk.Metadata;
 using CrmSvcUtilExtensions.Config;
 using System.Collections;
 using System.Collections.Generic;
+using CrmSvcUtilExtensions.Helpers;
 
 namespace CrmSvcUtilExtensions
 {
@@ -19,13 +20,7 @@ namespace CrmSvcUtilExtensions
         public BasicFilteringService(ICodeWriterFilterService defaultService)
         {
             this.DefaultService = defaultService;
-            LoadFilterData();
-        }
-
-        private void LoadFilterData()
-        {
-            IConfigurationHelper configHelper = new ConfigurationHelper();
-            _filterConfig = configHelper.GetSection<CrmSvcUtilFiltersConfig>("crmsvcutilfilters");
+            _filterConfig = (new FilterDataHelper()).LoadFilterData();
         }
 
         private ICodeWriterFilterService DefaultService { get; set; }
