@@ -21,6 +21,7 @@ build/
 bld/
 #[Bb]in/
 [Bb]in/coretools/Entities.cs
+[Bb]in/coretools/OptionSets.cs
 [Oo]bj/
 
 # Visual Studo 2015 cache/options directory

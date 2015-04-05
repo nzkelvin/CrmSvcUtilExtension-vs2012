@@ -6,59 +6,62 @@ using CrmSvcUtilExtensions.Config;
 using System.Collections;
 using System.Collections.Generic;
 
-/// <summary>
-/// Sample extension for the CrmSvcUtil.exe tool that generates early-bound
-/// classes for custom entities.
-/// </summary>
-public sealed class BasicFilteringService : ICodeWriterFilterService
+namespace CrmSvcUtilExtensions
 {
-    CrmSvcUtilFiltersConfig _filterConfig; 
-
-    public BasicFilteringService(ICodeWriterFilterService defaultService)
+    /// <summary>
+    /// Sample extension for the CrmSvcUtil.exe tool that generates early-bound
+    /// classes for custom entities.
+    /// </summary>
+    public sealed class BasicFilteringService : ICodeWriterFilterService
     {
-        this.DefaultService = defaultService;
-        LoadFilterData();
-    }
+        CrmSvcUtilFiltersConfig _filterConfig;
 
-    private void LoadFilterData()
-    {
-        IConfigurationHelper configHelper = new ConfigurationHelper();
-        _filterConfig = configHelper.GetSection<CrmSvcUtilFiltersConfig>("crmsvcutilfilters");
-    }
+        public BasicFilteringService(ICodeWriterFilterService defaultService)
+        {
+            this.DefaultService = defaultService;
+            LoadFilterData();
+        }
 
-    private ICodeWriterFilterService DefaultService { get; set; }
+        private void LoadFilterData()
+        {
+            IConfigurationHelper configHelper = new ConfigurationHelper();
+            _filterConfig = configHelper.GetSection<CrmSvcUtilFiltersConfig>("crmsvcutilfilters");
+        }
 
-    bool ICodeWriterFilterService.GenerateAttribute(AttributeMetadata attributeMetadata, IServiceProvider services)
-    {
-        return this.DefaultService.GenerateAttribute(attributeMetadata, services);
-    }
+        private ICodeWriterFilterService DefaultService { get; set; }
 
-    bool ICodeWriterFilterService.GenerateEntity(EntityMetadata entityMetadata, IServiceProvider services)
-    {
-        if (!_filterConfig.Entities.Entity.Any(entity => string.Equals(entity, entityMetadata.LogicalName, StringComparison.InvariantCultureIgnoreCase)))
-            return false;
+        bool ICodeWriterFilterService.GenerateAttribute(AttributeMetadata attributeMetadata, IServiceProvider services)
+        {
+            return this.DefaultService.GenerateAttribute(attributeMetadata, services);
+        }
 
-        return this.DefaultService.GenerateEntity(entityMetadata, services);
-    }
+        bool ICodeWriterFilterService.GenerateEntity(EntityMetadata entityMetadata, IServiceProvider services)
+        {
+            if (!_filterConfig.Entities.Entity.Any(entity => string.Equals(entity, entityMetadata.LogicalName, StringComparison.InvariantCultureIgnoreCase)))
+                return false;
 
-    bool ICodeWriterFilterService.GenerateOption(OptionMetadata optionMetadata, IServiceProvider services)
-    {
-        return this.DefaultService.GenerateOption(optionMetadata, services);
-    }
+            return this.DefaultService.GenerateEntity(entityMetadata, services);
+        }
 
-    bool ICodeWriterFilterService.GenerateOptionSet(OptionSetMetadataBase optionSetMetadata, IServiceProvider services)
-    {
-        return this.DefaultService.GenerateOptionSet(optionSetMetadata, services);
-    }
+        bool ICodeWriterFilterService.GenerateOption(OptionMetadata optionMetadata, IServiceProvider services)
+        {
+            return this.DefaultService.GenerateOption(optionMetadata, services);
+        }
 
-    bool ICodeWriterFilterService.GenerateRelationship(RelationshipMetadataBase relationshipMetadata, EntityMetadata otherEntityMetadata,
-    IServiceProvider services)
-    {
-        return this.DefaultService.GenerateRelationship(relationshipMetadata, otherEntityMetadata, services);
-    }
+        bool ICodeWriterFilterService.GenerateOptionSet(OptionSetMetadataBase optionSetMetadata, IServiceProvider services)
+        {
+            return this.DefaultService.GenerateOptionSet(optionSetMetadata, services);
+        }
 
-    bool ICodeWriterFilterService.GenerateServiceContext(IServiceProvider services)
-    {
-        return this.DefaultService.GenerateServiceContext(services);
+        bool ICodeWriterFilterService.GenerateRelationship(RelationshipMetadataBase relationshipMetadata, EntityMetadata otherEntityMetadata,
+        IServiceProvider services)
+        {
+            return this.DefaultService.GenerateRelationship(relationshipMetadata, otherEntityMetadata, services);
+        }
+
+        bool ICodeWriterFilterService.GenerateServiceContext(IServiceProvider services)
+        {
+            return this.DefaultService.GenerateServiceContext(services);
+        }
     }
 }
